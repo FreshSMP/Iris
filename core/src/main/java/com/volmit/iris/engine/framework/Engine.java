@@ -360,7 +360,7 @@ public interface Engine extends DataProvider, Fallible, LootProvider, BlockUpdat
                     return;
 
                 for (var script : scripts) {
-                    getExecution().updateChunk(script, chunk, c, (delay, task) -> run(semaphore, task, delay));
+                    getExecution().updateChunk(script, chunk, c, (delay, task) -> run(semaphore, task, c, delay));
                 }
             });
 

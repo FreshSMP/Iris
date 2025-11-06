@@ -206,7 +206,15 @@ val generateTemplates = tasks.register<Copy>("generateTemplates") {
     expand(inputs.properties)
 }
 
+tasks.matching { it.name.startsWith("sentryBundle") }.configureEach {
+    enabled = project.hasProperty("release")
+}
+
 tasks.generateSentryBundleIdJava {
+    dependsOn(generateTemplates)
+}
+
+tasks.named("sentryCollectSourcesJava") {
     dependsOn(generateTemplates)
 }
 
